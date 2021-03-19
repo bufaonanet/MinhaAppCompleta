@@ -30,7 +30,7 @@ namespace DevIO.Data.Context
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Fornecedor> Fornecedors { get; set; }
+        public DbSet<Fornecedor> Fornecedores { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Produto> Produtos { get; set; }
     }
