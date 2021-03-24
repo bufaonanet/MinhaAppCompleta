@@ -23,15 +23,36 @@ namespace DevIO.App.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [Route("erro/{id:length(3,3)}")]
+        public IActionResult Error(int id)
         {
-            return View();
-        }
+            var modelErro = new ErrorViewModel();
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (id == 500)
+            {
+                modelErro.ErroCode = id;
+                modelErro.Titulo = "Ocorreu um erro";
+                modelErro.Mensagem = "Ocorreu um erro. Tente mais tarde ou contate o suporte!";
+            }
+            else if (id == 404)
+            {
+                modelErro.ErroCode = id;
+                modelErro.Titulo = "Ocorreu um erro";
+                modelErro.Mensagem = "A página que você está procurando não existe. <br/> Em caso de dúvidas, entre em contato com o suporte!";
+            }
+            else if (id == 403)
+            {
+                modelErro.ErroCode = id;
+                modelErro.Titulo = "Ocorreu um erro";
+                modelErro.Mensagem = "Você não tem permissão para acessar essa página";
+            }
+            else
+            {
+                return StatusCode(500);
+            }
+
+
+            return View(modelErro);
         }
     }
 }
